@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illness Information</title>
+    <style>
+        /* Basic Styles */
+        body {  
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar ul li a:hover {
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border: 3px solid #ccc; /* Add border to sections */
+            padding: 20px; /* Add padding to sections */
+            text-align: center; /* Center text within sections */
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            line-height: 1.5;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="{% url "value:virus" %}">Заболевания</a></li>
+            <li><a href="{% url "value:instructions" %}">Инструкция</a></li>
+            <li><a href="{% url "value:value" %}">ИИ</a></li>
+            <li><a href="#register">Регистрация</a></li>
+            <li><a href="#login">Вход</a></li>
+        </ul>
+    </nav>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Illnesses</h2>
+        <ul>
+            <li><a href="{% url "value:virus" %}">Пневмония вирусная</a></li>
+            <li><a href="{% url "value:bacteria" %}">Пневмония бактериальная</a></li>
+            <li><a href="{% url "value:covid" %}">Covid-19</a></li>
+            <li><a href="{% url "value:tuberc" %}">Туберкулез</a></li>
+            <!-- Add more illnesses as needed -->
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="illness1" class="section">
+            <h2>Описание</h2>
+            <p><b>Вирусная пневмония </b>- это воспалительное заболевание легких, вызванное вирусной инфекцией, которая приводит к отеку альвеол и бронхиол в легких. Это может привести к затрудненному дыханию, кашлю, лихорадке и другим респираторным симптомам. К распространенным вирусам, вызывающим вирусную пневмонию, относятся грипп, респираторно-синцитиальный вирус (РСВ) и SARS-CoV-2.
+
+            </p>
+        </div>
+
+        <div id="illness2" class="section">
+            <h2>Методы обнаружения</h2>
+            <p> Врач может определить, что у вас вирусная пневмония, просто осмотрев вас и задав вопросы о ваших симптомах и общем состоянии здоровья. Скорее всего, врач прослушает ваши легкие стетоскопом. Это связано с тем, что определенные звуки могут означать наличие жидкости в легких. Но если врач не уверен, возможно, вам придется сделать рентген грудной клетки.
+<br><br>
+                Некоторым людям могут понадобиться дополнительные обследования. К ним могут относиться:<br>
+                <ul>
+               <li> Пульсоксиметрию (маленький приборчик, прикрепляемый к пальцу, который измеряет количество кислорода в крови).
+            </li> 
+               <li>Анализ крови</li> 
+                <li> Анализ мокроты, которую вы откашливаете (анализ мокроты).</li> 
+                <li> Компьютерная томография, чтобы более тщательно изучить ваши легкие</li>
+                <li>Анализ плевральной жидкости (когда врач берет немного жидкости из вашей груди через иглу)</li>
+                <li>Бронхоскопия - осмотр легких через оптический прицел</li>
+            </ul>
+                </p>  
+        </div>
+
+        <div id="illness3" class="section">
+            <h2>Методы лечения</h2>
+            <p> Ваш врач не станет назначать антибиотики, потому что они не убивают вирусы. Обычно вирусная пневмония просто проходит сама собой. В некоторых случаях врач может назначить противовирусные препараты. Он также может предложить лекарства от боли и лихорадки.
+<br><br>
+                Вот некоторые вещи, которые помогут вам почувствовать себя лучше:<br>
+                 <ul>
+                    <li> Больше отдыхайте. </li> 
+                    <li>Пейте много жидкости. Они разрыхлят грязь в легких, и вы сможете ее откашлять.</li> 
+                     <li> Пользуйтесь увлажнителем воздуха или примите теплую ванну (еще больше разрыхляет легкие).</li> 
+                     <li> Не курите.</li>
+                     <li>Оставайтесь дома, пока температура не спадет и вы не перестанете кашлять.</li>
+                 </ul> 
+                 <br>
+                 Вы начнете чувствовать себя лучше, когда вирус пройдет. Обычно это занимает несколько дней. Но вы можете не чувствовать себя полностью здоровым в течение 1-3 недель. Если вы пожилой человек или у вас есть другие заболевания, выздоровление может занять больше времени. Обязательно ходите на повторные приемы, чтобы врач мог проверить ваши легкие.
+               
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

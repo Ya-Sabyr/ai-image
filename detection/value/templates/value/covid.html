@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illness Information</title>
+    <style>
+        /* Basic Styles */
+        body {  
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar ul li a:hover {
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border: 3px solid #ccc; /* Add border to sections */
+            padding: 20px; /* Add padding to sections */
+            text-align: center; /* Center text within sections */
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            line-height: 1.5;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="{% url "value:virus" %}">Заболевания</a></li>
+            <li><a href="{% url "value:instructions" %}">Инструкция</a></li>
+            <li><a href="{% url "value:value" %}">ИИ</a></li>
+            <li><a href="#register">Регистрация</a></li>
+            <li><a href="#login">Вход</a></li>
+        </ul>
+    </nav>
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Illnesses</h2>
+        <ul>
+            <li><a href="{% url "value:virus" %}">Пневмония вирусная</a></li>
+            <li><a href="{% url "value:bacteria" %}">Пневмония бактериальная</a></li>
+            <li><a href="{% url "value:covid" %}">Covid-19</a></li>
+            <li><a href="{% url "value:tuberc" %}">Туберкулез</a></li>
+            <!-- Add more illnesses as needed -->
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="illness1" class="section">
+            <h2>Описание</h2>
+            <p><b>COVID-19</b> - это острое заболевание людей, вызываемое коронавирусом, которое характеризуется в основном лихорадкой и кашлем и способно прогрессировать до тяжелых симптомов и в некоторых случаях приводить к смерти, особенно у пожилых людей и лиц с сопутствующими заболеваниями.</p>
+        </div>
+
+        <div id="illness2" class="section">
+            <h2>Методы обнаружения</h2>
+            <p> Вот некоторые рекомендации о том, когда следует сдавать анализ на COVID-19:
+                <ul>
+               <li>Если у вас появились симптомы COVID-19, сразу же сдайте анализ на это заболевание.</li> 
+               <li>Если вы подверглись воздействию вируса COVID-19, но у вас нет симптомов, подождите не менее пяти дней после контакта, а затем сдайте анализ.</li> 
+                <li>Если у вас есть симптомы и вы сдали положительный анализ на COVID-19 в течение последних 30 дней, вы можете сдать анализ еще раз. Но если вы только что подверглись воздействию коронавируса и у вас нет симптомов, вам не нужно сдавать анализ.</li> 
+            </ul>
+                </p>  
+        </div>
+
+        <div id="illness3" class="section">
+            <h2>Методы лечения</h2>
+            <p> 
+                Многие люди с COVID-19 выздоравливают благодаря отдыху, обильному питью и лечению симптомов. Помочь могут такие лекарства, которые можно приобрести без рецепта, как:
+                <ul> <li>  Жаропонижающие средства.</li> 
+                    <li>Обезболивающие, такие как ибупрофен или ацетаминофен.</li> 
+                        <li>Сироп или лекарство от кашля.</li> 
+                        </ul> <br>
+                Если вы подвержены высокому риску серьезного заболевания COVID-19, ваш лечащий врач может предложить вам лекарства, чтобы предотвратить обострение легкого заболевания. Эти лекарства могут включать нирматрелвир и ритонавир (Паксловид), ремдезивир (Веклури) или молнупиравир (Лагеврио).
+                Пакловид и Лагеврио принимаются через рот в виде таблеток. Веклури вводится через иглу в вену.
+                <br>
+                Если вы очень больны, вам может потребоваться лечение в больнице.
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

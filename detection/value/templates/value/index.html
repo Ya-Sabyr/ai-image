@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Image Model</title>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.left-panel, .right-panel {
+    width: 40%;
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#imageUpload {
+    display: none;
+}
+
+.file-upload-label {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+#imageUploadLabel {
+    font-size: 16px;
+}
+
+#imageUploadLabel:hover {
+    background-color: #0056b3;
+}
+
+#label-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prediction {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+#webcam-container {
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="{% url "value:virus" %}">Заболевания</a></li>
+            <li><a href="{% url "value:instructions" %}">Инструкция</a></li>
+            <li><a href="{% url "value:value" %}">ИИ</a></li>
+            <li><a href="#register">Регистрация</a></li>
+            <li><a href="#login">Вход</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="left-panel">
+            <label for="imageUpload" class="file-upload-label" id="imageUploadLabel">Выберите файл</label>
+            <input type="file" id="imageUpload" accept="image/*">
+            <button id="startButton" type="button" onclick="startProcessing()">Обработка</button>
+        </div>
+        <div class="right-panel">
+            <div id="label-container"></div>
+        </div>
+    </div>
+
+    <div id="webcam-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript">
+        const URL = "https://teachablemachine.withgoogle.com/models/OSriIR7qr/";
+
+        let model, webcam, labelContainer, maxPredictions;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            const flip = true;
+            webcam = new tmImage.Webcam(200, 200, flip);
+            await webcam.setup();
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) {
+                labelContainer.appendChild(document.createElement("div"));
+            }
+        }
+
+        async function loop() {
+            webcam.update();
+            await predict();
+            window.requestAnimationFrame(loop);
+        }
+
+        async function predict() {
+            const prediction = await model.predict(webcam.canvas);
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
+        }
+
+        async function startProcessing() {
+            const imageUpload = document.getElementById("imageUpload");
+            const file = imageUpload.files[0];
+            if (file) {
+                await processImage(file);
+            } else {
+                console.log("No file selected.");
+            }
+        }
+
+        async function processImage(file) {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const image = new Image();
+                image.onload = async function () {
+                    const prediction = await model.predict(image);
+                    displayPredictions(prediction);
+                };
+                image.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayPredictions(prediction) {
+            const labelContainer = document.getElementById("label-container");
+            labelContainer.innerHTML = ""; // Clear previous predictions
+            for (let i = 0; i < maxPredictions; i++) {
+                const classPrediction =
+                    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                const predictionElement = document.createElement("div");
+                predictionElement.textContent = classPrediction;
+                labelContainer.appendChild(predictionElement);
+            }
+        }
+    </script>
+</body>
+</html>

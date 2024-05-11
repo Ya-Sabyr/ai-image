@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Инструкция</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f7ff;
+    padding: 20px;
+    color: #333;
+  }
+  .header {
+    background-color: #1a8cff;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+  }
+  .container {
+    background-color: #f2f2f2;
+    border: 1px solid #cccccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  .video {
+    width: 100%;
+    height: auto; /* Adjusted for iframe */
+    border-radius: 5px;
+  }
+  .instructions {
+    font-size: 1.2em;
+    line-height: 1.5;
+  }
+  .step {
+    margin-top: 20px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+</style>
+
+</head>
+<body>
+  <div class="header">Инструкция</div>
+  <div class="container">
+    <iframe class="video" src="https://www.youtube.com/embed/j3vr-6bHUe0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="instructions">
+      <div class="step"><strong>Как пользоваться ?</strong></div>
+      <div class="step">Загрузите картину</div>
+      <div class="step">Нажмите кнопку START</div>
+      <div class="step">Ждать результат</div>
+    </div>
+    <a href="{% url "value:value" %}"><button type="button">Start</button></a>
+  </div>
+</body>
+</html>
